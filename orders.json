@@ -1,0 +1,20 @@
+[
+  {
+    "name": "John Doe",
+    "phone": "1234567890",
+    "lessonIDs": ["647f1f77e2b2d1c1a3d17f12", "647f1f77e2b2d1c1a3d17f13"],
+    "numberOfSpaces": 2
+  },
+  {
+    "name": "Jane Smith",
+    "phone": "9876543210",
+    "lessonIDs": ["647f1f77e2b2d1c1a3d17f14"],
+    "numberOfSpaces": 1
+  },
+  {
+    "name": "Alice Brown",
+    "phone": "5555555555",
+    "lessonIDs": ["647f1f77e2b2d1c1a3d17f15", "647f1f77e2b2d1c1a3d17f16"],
+    "numberOfSpaces": 3
+  }
+]

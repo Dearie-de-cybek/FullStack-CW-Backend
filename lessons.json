@@ -1,0 +1,72 @@
+[
+  {
+    "topic": "Mathematics",
+    "location": "Hendon",
+    "price": 100,
+    "spaces": 5,
+    "image": "images/math.png"
+  },
+  {
+    "topic": "Science",
+    "location": "Colindale",
+    "price": 80,
+    "spaces": 5,
+    "image": "images/science.png"
+  },
+  {
+    "topic": "English",
+    "location": "Brent Cross",
+    "price": 90,
+    "spaces": 5,
+    "image": "images/english.png"
+  },
+  {
+    "topic": "Art",
+    "location": "Golders Green",
+    "price": 95,
+    "spaces": 5,
+    "image": "images/art.png"
+  },
+  {
+    "topic": "Music",
+    "location": "Finchley",
+    "price": 110,
+    "spaces": 5,
+    "image": "images/music.png"
+  },
+  {
+    "topic": "History",
+    "location": "Mill Hill",
+    "price": 75,
+    "spaces": 5,
+    "image": "images/history.png"
+  },
+  {
+    "topic": "French",
+    "location": "Hendon",
+    "price": 85,
+    "spaces": 5,
+    "image": "images/french.png"
+  },
+  {
+    "topic": "Coding",
+    "location": "Colindale",
+    "price": 150,
+    "spaces": 5,
+    "image": "images/coding.png"
+  },
+  {
+    "topic": "Sports",
+    "location": "Brent Cross",
+    "price": 60,
+    "spaces": 5,
+    "image": "images/sports.png"
+  },
+  {
+    "topic": "Drama",
+    "location": "Golders Green",
+    "price": 120,
+    "spaces": 5,
+    "image": "images/drama.png"
+  }
+]
