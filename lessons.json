@@ -1,69 +1,69 @@
 [
   {
-    "topic": "Mathematics",
+    "subject": "Mathematics",
     "location": "Hendon",
     "price": 100,
     "spaces": 5,
     "image": "images/math.png"
   },
   {
-    "topic": "Science",
+    "subject": "Science",
     "location": "Colindale",
     "price": 80,
     "spaces": 5,
     "image": "images/science.png"
   },
   {
-    "topic": "English",
+    "subject": "English",
     "location": "Brent Cross",
     "price": 90,
     "spaces": 5,
     "image": "images/english.png"
   },
   {
-    "topic": "Art",
+    "subject": "Art",
     "location": "Golders Green",
     "price": 95,
     "spaces": 5,
     "image": "images/art.png"
   },
   {
-    "topic": "Music",
+    "subject": "Music",
     "location": "Finchley",
     "price": 110,
     "spaces": 5,
     "image": "images/music.png"
   },
   {
-    "topic": "History",
+    "subject": "History",
     "location": "Mill Hill",
     "price": 75,
     "spaces": 5,
     "image": "images/history.png"
   },
   {
-    "topic": "French",
+    "subject": "French",
     "location": "Hendon",
     "price": 85,
     "spaces": 5,
     "image": "images/french.png"
   },
   {
-    "topic": "Coding",
+    "subject": "Coding",
     "location": "Colindale",
     "price": 150,
     "spaces": 5,
     "image": "images/coding.png"
   },
   {
-    "topic": "Sports",
+    "subject": "Sports",
     "location": "Brent Cross",
     "price": 60,
     "spaces": 5,
     "image": "images/sports.png"
   },
   {
-    "topic": "Drama",
+    "subject": "Drama",
     "location": "Golders Green",
     "price": 120,
     "spaces": 5,

@@ -5,12 +5,12 @@ app.use(cors());
 app.use(express.json());
 app.set("json spaces", 3);
 const path = require("path");
+
+app.use("/images", express.static(path.join(__dirname, "images")));
 let PropertiesReader = require("properties-reader");
 
 let propertiesPath = path.resolve(__dirname, "db.properties");
 let properties = PropertiesReader(propertiesPath);
-
-
 
 let dbPprefix = properties.get("db.prefix");
 
@@ -40,7 +40,17 @@ async function connectDB() {
 
 connectDB();
 
+app.get("/images/:imageName", (req, res) => {
+  const imagePath = path.join(__dirname, "images", req.params.imageName);
 
+  
+  res.sendFile(imagePath, (err) => {
+    if (err) {
+      console.error("Image not found:", err);
+      return res.status(404).json({ error: "Image not found" });
+    }
+  });
+});
 
 app.param("collectionName", async function (req, res, next, collectionName) {
   req.collection = db1.collection(collectionName);
@@ -52,7 +62,13 @@ app.param("collectionName", async function (req, res, next, collectionName) {
 app.get("/collections/:collectionName", async function (req, res) {
   try {
     const data = await req.collection.find().toArray();
-    res.status(200).json(data);
+    const lessonsWithImageURLs = data.map(lesson => {
+        return {
+          ...lesson,
+          image: `${lesson.image}` 
+        };
+      });
+      res.status(200).json(lessonsWithImageURLs);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "Unable to fetch data" });
@@ -120,37 +136,36 @@ app.get("/collections/:collectionName/:id", async function (req, res) {
 });
 
 app.get("/search/:collectionName", async (req, res, next) => {
-  try {
-    const { collectionName } = req.params;
-    const { query, limit = 10 } = req.query;
-    if (!query) {
-      return res.status(400).json({ error: "Search query is required" });
+    try {
+      const { collectionName } = req.params;
+      const { query, limit = 10 } = req.query;
+      
+      if (!query) {
+        return res.status(400).json({ error: "Search query is required" });
+      }
+  
+      const validCollections = ["orders", "lessons"];
+      if (!validCollections.includes(collectionName)) {
+        return res.status(400).json({ error: "Invalid collection name" });
+      }
+  
+      const searchRegex = new RegExp(query, "i");
+      const results = await req.collection
+        .find({
+          $or: [
+            { subject: searchRegex },
+            { location: searchRegex },
+            { price: { $regex: searchRegex } } 
+          ],
+        })
+        .limit(parseInt(limit))
+        .toArray();
+  
+      res.json(results);
+    } catch (err) {
+      next(err);
     }
-
-    const validCollections = ["orders", "lessons"];
-    if (!validCollections.includes(collectionName)) {
-      return res.status(400).json({ error: "Invalid collection name" });
-    }
-
-    const searchRegex = new RegExp(query, "i");
-    const results = await req.collection
-      .find({
-        $or: [
-          { topic: searchRegex },
-          { location: searchRegex },
-          { price: searchRegex },
-          { space: searchRegex },
-        ],
-      })
-      .limit(parseInt(limit))
-      .toArray();
-
-    res.json(results);
-  } catch (err) {
-    next(err);
-  }
-});
-
+  });
 app.use((err, req, res, next) => {
   console.error("Global error handler:", err);
   res.status(500).json({ error: "An error occurred" });
