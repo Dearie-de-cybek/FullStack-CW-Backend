@@ -6,7 +6,7 @@ app.use(express.json());
 app.set("json spaces", 3);
 const path = require("path");
 
-app.use("/images", express.static(path.join(__dirname, "images")));
+
 let PropertiesReader = require("properties-reader");
 
 let propertiesPath = path.resolve(__dirname, "db.properties");
@@ -39,6 +39,8 @@ async function connectDB() {
 }
 
 connectDB();
+
+app.use("/images", express.static(path.join(__dirname, "images")));
 
 app.get("/images/:imageName", (req, res) => {
   const imagePath = path.join(__dirname, "images", req.params.imageName);
@@ -135,37 +137,7 @@ app.get("/collections/:collectionName/:id", async function (req, res) {
   }
 });
 
-app.get("/search/:collectionName", async (req, res, next) => {
-    try {
-      const { collectionName } = req.params;
-      const { query, limit = 10 } = req.query;
-      
-      if (!query) {
-        return res.status(400).json({ error: "Search query is required" });
-      }
-  
-      const validCollections = ["orders", "lessons"];
-      if (!validCollections.includes(collectionName)) {
-        return res.status(400).json({ error: "Invalid collection name" });
-      }
-  
-      const searchRegex = new RegExp(query, "i");
-      const results = await req.collection
-        .find({
-          $or: [
-            { subject: searchRegex },
-            { location: searchRegex },
-            { price: { $regex: searchRegex } } 
-          ],
-        })
-        .limit(parseInt(limit))
-        .toArray();
-  
-      res.json(results);
-    } catch (err) {
-      next(err);
-    }
-  });
+
 app.use((err, req, res, next) => {
   console.error("Global error handler:", err);
   res.status(500).json({ error: "An error occurred" });
